@@ -22,6 +22,9 @@
             text-align: center;
             height: 100vh; /* Full height of the viewport */
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .title {
@@ -149,9 +152,10 @@
         }
 
         .footer {
-            margin-top: 40px;
             font-size: 1em;
             color: #aaa;
+            margin-top: auto;
+            padding: 10px;
         }
 
         .footer strong {
@@ -224,17 +228,17 @@
 
         <form id="settingsForm">
             <label for="accuracy">Accuracy (%):</label>
-            <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100">
+            <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="75">
             <br>
 
             <label for="smoothness">Smoothness (0-10):</label>
-            <input type="number" id="smoothness" name="smoothness" min="0" max="10" value="1" step="0.1">
+            <input type="number" id="smoothness" name="smoothness" min="0" max="10" value="5" step="0.1">
             <br>
 
             <label for="targetPriority">Target Priority:</label>
             <select id="targetPriority" name="targetPriority">
                 <option value="head">Head</option>
-                <option value="body">Body</option>
+                <option value="body" selected>Body</option>
             </select>
             <br>
 
@@ -242,7 +246,7 @@
             <select id="range" name="range">
                 <option value="any">Any</option>
                 <option value="close">Close</option>
-                <option value="medium">Medium</option>
+                <option value="medium" selected>Medium</option>
                 <option value="far">Far</option>
             </select>
             <br><br>
