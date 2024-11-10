@@ -29,7 +29,7 @@
         .title {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
-            color: white;
+            color: white; /* Title color changed to white */
             letter-spacing: 2px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
             margin-top: 20px;
@@ -39,16 +39,17 @@
         }
 
         .title .x {
-            color: blue;
+            color: blue; /* X color changed to blue */
         }
 
         .title .tm {
             font-size: 0.6em;
             margin-left: 5px;
             vertical-align: top;
-            color: blue;
+            color: blue; /* TM color changed to blue */
         }
 
+        /* Login Section Styles */
         .login-container {
             display: block;
             background-color: rgba(0, 0, 0, 0.7);
@@ -94,6 +95,7 @@
             background-color: #005bb5;
         }
 
+        /* Mod Menu Styles */
         .mod-menu-container {
             display: none;
             background-color: rgba(0, 0, 0, 0.6);
@@ -159,6 +161,7 @@
             color: #ccc;
         }
 
+        /* Toggle Switch Styles */
         .switch {
             position: relative;
             display: inline-block;
@@ -204,6 +207,7 @@
             transform: translateX(26px);
         }
 
+        /* Fade-in Animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -216,14 +220,17 @@
     </style>
 
     <script>
+        // Show the login screen initially
         window.onload = function() {
             document.querySelector('.login-container').style.display = 'block';
         }
 
+        // Login validation with username "RG" and password "1k"
         function login() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
+            // Basic login validation (replace with your own logic)
             if (username === "RG" && password === "1k") {
                 document.querySelector('.login-container').style.display = 'none';
                 document.querySelector('.mod-menu-container').style.display = 'block';
@@ -232,6 +239,7 @@
             }
         }
 
+        // Apply settings and open Free Fire app with com.dts.freefireth package
         function applySettings() {
             var accuracy = document.getElementById("accuracy").value;
             var smoothness = document.getElementById("smoothness").value;
@@ -240,33 +248,31 @@
             var headtracking = document.getElementById("headtracking").checked ? "true" : "false";
             var aimlock = document.getElementById("aimlock").checked ? "true" : "false";
 
-            var uri = "intent://?accuracy=" + accuracy + 
+            // Build the URI with parameters, using the com.dts.freefireth package
+            var uri = "freefire://com.dts.freefireth?accuracy=" + accuracy + 
                       "&smoothness=" + smoothness +
                       "&targetPriority=" + targetPriority +
                       "&range=" + range + 
                       "&headtracking=" + headtracking +
-                      "&aimlock=" + aimlock +
-                      "#Intent;scheme=freefire;package=com.dts.freefirethios;end";
+                      "&aimlock=" + aimlock;
 
-            alert("Settings Applied:\n" + 
-                  "Accuracy: " + accuracy + "\n" + 
-                  "Smoothness: " + smoothness + "\n" +
-                  "Target Priority: " + targetPriority + "\n" +
-                  "Range: " + range + "\n" +
-                  "Headtracking: " + (headtracking === "true" ? "Enabled" : "Disabled") + "\n" +
-                  "Aimlock: " + (aimlock === "true" ? "Enabled" : "Disabled"));
+            // Try to open the Free Fire app
+            window.location.href = uri;
 
+            // If Free Fire is not opened within 2 seconds, redirect to the App Store or Play Store
             setTimeout(function() {
-                window.location.replace(uri);
-            }, 500);
+                window.location.href = "https://apps.apple.com/app/id1113944055";  // For iOS (replace with actual app URL for Free Fire)
+            }, 2000);
         }
 
     </script>
 </head>
 <body>
 
+    <!-- Main Title -->
     <div class="title">RG<span class="x">X</span>treme Mods<span class="tm">™</span></div>
 
+    <!-- Login Form -->
     <div class="login-container">
         <h3>Login to Access Mod Menu</h3>
         <input type="text" id="username" placeholder="Username" required><br>
@@ -274,47 +280,42 @@
         <button onclick="login()">Login</button>
     </div>
 
+    <!-- Mod Menu -->
     <div class="mod-menu-container">
-        <h3>Mod Menu Settings</h3>
-
+        <h3>Mod Menu</h3>
         <label for="accuracy">Accuracy:</label>
         <input type="number" id="accuracy" value="100" min="0" max="100"><br>
 
         <label for="smoothness">Smoothness:</label>
-        <input type="number" id="smoothness" value="100" min="0" max="100"><br>
+        <input type="number" id="smoothness" value="50" min="0" max="100"><br>
 
         <label for="targetPriority">Target Priority:</label>
         <select id="targetPriority">
-            <option value="1">1 (Highest)</option>
-            <option value="2">2</option>
-            <option value="3" selected>3 (Lowest)</option>
+            <option value="head">Head</option>
+            <option value="body">Body</option>
         </select><br>
 
         <label for="range">Range:</label>
-        <select id="range">
-            <option value="any">Any</option>
-            <option value="close">Close</option>
-            <option value="medium" selected>Medium</option>
-            <option value="far">Far</option>
-        </select><br>
+        <input type="number" id="range" value="100" min="0" max="100"><br>
 
-        <label for="headtracking">Enable Headtracking:</label>
+        <label>Enable Headtracking:</label>
         <label class="switch">
             <input type="checkbox" id="headtracking">
             <span class="slider"></span>
         </label><br>
 
-        <label for="aimlock">Enable Aimlock:</label>
+        <label>Enable Aimlock:</label>
         <label class="switch">
             <input type="checkbox" id="aimlock">
             <span class="slider"></span>
         </label><br>
 
-        <button type="button" onclick="applySettings()">Apply Settings</button>
+        <button onclick="applySettings()">Apply Settings</button>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
-        <p>RGXtreme Mods™ | Developed by <strong>@iOSrazielOFC</strong></p>
+        <p>RGXtreme Mods™ | All Rights Reserved</p>
     </div>
 
 </body>
