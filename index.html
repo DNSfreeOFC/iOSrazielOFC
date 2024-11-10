@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-image: 
+            background-image: url('background-image.jpg'); /* Add your own background image URL */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -30,7 +30,7 @@
         .title {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
-            color: white; /* Title color changed to white */
+            color: white;
             letter-spacing: 2px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
             margin-top: 20px;
@@ -40,17 +40,16 @@
         }
 
         .title .x {
-            color: blue; /* X color changed to blue */
+            color: blue;
         }
 
         .title .tm {
             font-size: 0.6em;
             margin-left: 5px;
             vertical-align: top;
-            color: blue; /* TM color changed to blue */
+            color: blue;
         }
 
-        /* Login Section Styles */
         .login-container {
             display: block;
             background-color: rgba(0, 0, 0, 0.7);
@@ -96,7 +95,6 @@
             background-color: #005bb5;
         }
 
-        /* Mod Menu Styles */
         .mod-menu-container {
             display: none;
             background-color: rgba(0, 0, 0, 0.6);
@@ -124,15 +122,13 @@
             color: #d3d3d3;
         }
 
-        .mod-menu-container input[type="number"], .mod-menu-container select {
-            font-size: 1.2em;
-            padding: 10px;
-            width: 70%;
+        .mod-menu-container input[type="range"] {
+            width: 80%;
             margin-bottom: 15px;
-            border-radius: 8px;
-            border: 2px solid #555;
-            background-color: #2b2b2b;
-            color: #e0e0e0;
+        }
+
+        .mod-menu-container input[type="checkbox"] {
+            margin: 10px;
         }
 
         .mod-menu-container button {
@@ -162,52 +158,6 @@
             color: #ccc;
         }
 
-        /* Toggle Switch Styles */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            border-radius: 50%;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-        }
-
-        input:checked + .slider {
-            background-color: #1a73e8;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
         /* Fade-in Animation */
         @keyframes fadeIn {
             from {
@@ -217,7 +167,6 @@
                 opacity: 1;
             }
         }
-
     </style>
 
     <script>
@@ -242,28 +191,19 @@
 
         // Apply settings and open Free Fire app
         function applySettings() {
-            var accuracy = document.getElementById("accuracy").value;
-            var smoothness = document.getElementById("smoothness").value;
-            var targetPriority = document.getElementById("targetPriority").value;
-            var range = document.getElementById("range").value;
-            var headtracking = document.getElementById("headtracking").checked ? "true" : "false";
-            var aimlock = document.getElementById("aimlock").checked ? "true" : "false";
+            var aimbot = document.getElementById("aimbot").value;
+            var headtracking = "100"; // Always 100% for headtracking
+            var aimlock = "100"; // Always 100% for aimlock
 
             // Build the URI with parameters
-            var uri = "freefire://?accuracy=" + accuracy + 
-                      "&smoothness=" + smoothness +
-                      "&targetPriority=" + targetPriority +
-                      "&range=" + range + 
+            var uri = "freefire://?aimbot=" + aimbot +
                       "&headtracking=" + headtracking +
                       "&aimlock=" + aimlock;
 
             alert("Settings Applied:\n" + 
-                  "Accuracy: " + accuracy + "\n" + 
-                  "Smoothness: " + smoothness + "\n" +
-                  "Target Priority: " + targetPriority + "\n" +
-                  "Range: " + range + "\n" +
-                  "Headtracking: " + (headtracking === "true" ? "Enabled" : "Disabled") + "\n" +
-                  "Aimlock: " + (aimlock === "true" ? "Enabled" : "Disabled"));
+                  "Aimbot: " + aimbot + "%" + "\n" + 
+                  "Headtracking: " + headtracking + "%" + "\n" +
+                  "Aimlock: " + aimlock + "%");
 
             // Redirect to Free Fire app with the settings
             setTimeout(function() {
@@ -291,38 +231,14 @@
         <h3>Mod Menu Settings</h3>
 
         <!-- Settings Form -->
-        <label for="accuracy">Accuracy:</label>
-        <input type="number" id="accuracy" value="100" min="0" max="100"><br>
+        <label for="aimbot">Aimbot Strength (%):</label>
+        <input type="range" id="aimbot" value="100" min="0" max="100"><br>
 
-        <label for="smoothness">Smoothness:</label>
-        <input type="number" id="smoothness" value="100" min="0" max="100"><br>
+        <label for="headtracking">Headtracking (100%):</label>
+        <input type="checkbox" id="headtracking" disabled checked><br>
 
-        <label for="targetPriority">Target Priority:</label>
-        <select id="targetPriority">
-            <option value="1">1 (Highest)</option>
-            <option value="2">2</option>
-            <option value="3" selected>3 (Lowest)</option>
-        </select><br>
-
-        <label for="range">Range:</label>
-        <select id="range">
-            <option value="any">Any</option>
-            <option value="close">Close</option>
-            <option value="medium" selected>Medium</option>
-            <option value="far">Far</option>
-        </select><br>
-
-        <label for="headtracking">Enable Headtracking:</label>
-        <label class="switch">
-            <input type="checkbox" id="headtracking">
-            <span class="slider"></span>
-        </label><br>
-
-        <label for="aimlock">Enable Aimlock:</label>
-        <label class="switch">
-            <input type="checkbox" id="aimlock">
-            <span class="slider"></span>
-        </label><br>
+        <label for="aimlock">Aimlock (100%):</label>
+        <input type="checkbox" id="aimlock" disabled checked><br>
 
         <button type="button" onclick="applySettings()">Apply Settings</button>
     </div>
