@@ -167,6 +167,53 @@
                 opacity: 1;
             }
         }
+
+        /* Toggle Switch Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #1a73e8;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
     </style>
 
     <script>
@@ -189,11 +236,17 @@
             }
         }
 
+        // Update Aimbot strength text
+        function updateAimbotText() {
+            var aimbotValue = document.getElementById("aimbot").value;
+            document.getElementById("aimbotText").innerText = "Aimbot Strength: " + aimbotValue + "%";
+        }
+
         // Apply settings and open Free Fire app
         function applySettings() {
             var aimbot = document.getElementById("aimbot").value;
-            var headtracking = "100"; // Always 100% for headtracking
-            var aimlock = "100"; // Always 100% for aimlock
+            var headtracking = document.getElementById("headtracking").checked ? "100" : "0";
+            var aimlock = document.getElementById("aimlock").checked ? "100" : "0";
 
             // Build the URI with parameters
             var uri = "freefire://?aimbot=" + aimbot +
@@ -230,15 +283,24 @@
     <div class="mod-menu-container">
         <h3>Mod Menu Settings</h3>
 
-        <!-- Settings Form -->
-        <label for="aimbot">Aimbot Strength (%):</label>
-        <input type="range" id="aimbot" value="100" min="0" max="100"><br>
+        <!-- Aimbot Strength -->
+        <label for="aimbot">Aimbot Strength:</label>
+        <input type="range" id="aimbot" min="0" max="100" value="100" oninput="updateAimbotText()">
+        <span id="aimbotText">Aimbot Strength: 100%</span><br>
 
-        <label for="headtracking">Headtracking (100%):</label>
-        <input type="checkbox" id="headtracking" disabled checked><br>
+        <!-- Headtracking Toggle -->
+        <label for="headtracking">Enable Headtracking:</label>
+        <label class="switch">
+            <input type="checkbox" id="headtracking" checked disabled>
+            <span class="slider"></span>
+        </label><br>
 
-        <label for="aimlock">Aimlock (100%):</label>
-        <input type="checkbox" id="aimlock" disabled checked><br>
+        <!-- Aimlock Toggle -->
+        <label for="aimlock">Enable Aimlock:</label>
+        <label class="switch">
+            <input type="checkbox" id="aimlock" checked>
+            <span class="slider"></span>
+        </label><br>
 
         <button type="button" onclick="applySettings()">Apply Settings</button>
     </div>
