@@ -11,6 +11,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background-image: 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -239,7 +240,7 @@
             }
         }
 
-        // Apply settings and open Free Fire app with com.dts.freefireth package
+        // Apply settings and open Free Fire app
         function applySettings() {
             var accuracy = document.getElementById("accuracy").value;
             var smoothness = document.getElementById("smoothness").value;
@@ -248,7 +249,7 @@
             var headtracking = document.getElementById("headtracking").checked ? "true" : "false";
             var aimlock = document.getElementById("aimlock").checked ? "true" : "false";
 
-            // Build the URI with parameters for mod settings
+            // Build the URI with parameters
             var uri = "freefire://?accuracy=" + accuracy + 
                       "&smoothness=" + smoothness +
                       "&targetPriority=" + targetPriority +
@@ -256,8 +257,18 @@
                       "&headtracking=" + headtracking +
                       "&aimlock=" + aimlock;
 
-            // Try to open the Free Fire app
-            window.location.href = uri;
+            alert("Settings Applied:\n" + 
+                  "Accuracy: " + accuracy + "\n" + 
+                  "Smoothness: " + smoothness + "\n" +
+                  "Target Priority: " + targetPriority + "\n" +
+                  "Range: " + range + "\n" +
+                  "Headtracking: " + (headtracking === "true" ? "Enabled" : "Disabled") + "\n" +
+                  "Aimlock: " + (aimlock === "true" ? "Enabled" : "Disabled"));
+
+            // Redirect to Free Fire app with the settings
+            setTimeout(function() {
+                window.location.href = uri;
+            }, 500);
         }
 
     </script>
@@ -265,52 +276,59 @@
 <body>
 
     <!-- Main Title -->
-    <div class="title">RGX<span class="x">X</span>treme<span class="tm">™</span></div>
+    <div class="title">RG<span class="x">X</span>treme Mods<span class="tm">™</span></div>
 
-    <!-- Login Section -->
+    <!-- Login Form -->
     <div class="login-container">
-        <h2>Login</h2>
+        <h3>Login to Access Mod Menu</h3>
         <input type="text" id="username" placeholder="Username" required><br>
         <input type="password" id="password" placeholder="Password" required><br>
         <button onclick="login()">Login</button>
     </div>
 
-    <!-- Mod Menu -->
+    <!-- Mod Menu Form -->
     <div class="mod-menu-container">
-        <h3>Mod Menu</h3>
+        <h3>Mod Menu Settings</h3>
+
+        <!-- Settings Form -->
         <label for="accuracy">Accuracy:</label>
         <input type="number" id="accuracy" value="100" min="0" max="100"><br>
 
         <label for="smoothness">Smoothness:</label>
-        <input type="number" id="smoothness" value="50" min="0" max="100"><br>
+        <input type="number" id="smoothness" value="100" min="0" max="100"><br>
 
         <label for="targetPriority">Target Priority:</label>
         <select id="targetPriority">
-            <option value="head">Head</option>
-            <option value="body">Body</option>
+            <option value="1">1 (Highest)</option>
+            <option value="2">2</option>
+            <option value="3" selected>3 (Lowest)</option>
         </select><br>
 
         <label for="range">Range:</label>
-        <input type="number" id="range" value="100" min="0" max="100"><br>
+        <select id="range">
+            <option value="any">Any</option>
+            <option value="close">Close</option>
+            <option value="medium" selected>Medium</option>
+            <option value="far">Far</option>
+        </select><br>
 
-        <label>Enable Headtracking:</label>
+        <label for="headtracking">Enable Headtracking:</label>
         <label class="switch">
             <input type="checkbox" id="headtracking">
             <span class="slider"></span>
         </label><br>
 
-        <label>Enable Aimlock:</label>
+        <label for="aimlock">Enable Aimlock:</label>
         <label class="switch">
             <input type="checkbox" id="aimlock">
             <span class="slider"></span>
         </label><br>
 
-        <button onclick="applySettings()">Apply Settings</button>
+        <button type="button" onclick="applySettings()">Apply Settings</button>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
-        <p>RGXtreme Mods™ | All Rights Reserved</p>
+        <p>RGXtreme Mods™ | Developed by <strong>@iOSrazielOFC</strong></p>
     </div>
 
 </body>
