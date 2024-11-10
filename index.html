@@ -248,8 +248,8 @@
             var headtracking = document.getElementById("headtracking").checked ? "true" : "false";
             var aimlock = document.getElementById("aimlock").checked ? "true" : "false";
 
-            // Build the URI with parameters, using the com.dts.freefireth package
-            var uri = "freefire://com.dts.freefireth?accuracy=" + accuracy + 
+            // Build the URI with parameters for mod settings
+            var uri = "freefire://?accuracy=" + accuracy + 
                       "&smoothness=" + smoothness +
                       "&targetPriority=" + targetPriority +
                       "&range=" + range + 
@@ -270,11 +270,11 @@
 <body>
 
     <!-- Main Title -->
-    <div class="title">RG<span class="x">X</span>treme Mods<span class="tm">™</span></div>
+    <div class="title">RGX<span class="x">X</span>treme<span class="tm">™</span></div>
 
-    <!-- Login Form -->
+    <!-- Login Section -->
     <div class="login-container">
-        <h3>Login to Access Mod Menu</h3>
+        <h2>Login</h2>
         <input type="text" id="username" placeholder="Username" required><br>
         <input type="password" id="password" placeholder="Password" required><br>
         <button onclick="login()">Login</button>
