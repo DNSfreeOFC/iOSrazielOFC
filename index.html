@@ -247,16 +247,19 @@
             var aimbot = document.getElementById("aimbot").value;
             var headtracking = document.getElementById("headtracking").checked ? "100" : "0";
             var aimlock = document.getElementById("aimlock").checked ? "100" : "0";
+            var aimassist = document.getElementById("aimassist").checked ? "100" : "0"; // New Aim Assist
 
             // Build the URI with parameters
             var uri = "freefire://?aimbot=" + aimbot +
                       "&headtracking=" + headtracking +
-                      "&aimlock=" + aimlock;
+                      "&aimlock=" + aimlock +
+                      "&aimassist=" + aimassist; // Add Aim Assist parameter
 
             alert("Settings Applied:\n" + 
                   "Aimbot: " + aimbot + "%" + "\n" + 
                   "Headtracking: " + headtracking + "%" + "\n" +
-                  "Aimlock: " + aimlock + "%");
+                  "Aimlock: " + aimlock + "%" + "\n" +
+                  "Aim Assist: " + aimassist + "%"); // Display Aim Assist in alert
 
             // Redirect to Free Fire app with the settings
             setTimeout(function() {
@@ -274,6 +277,8 @@
     <!-- Login Form -->
     <div class="login-container">
         <h3>Login to Access Mod Menu</h3>
+        <p><strong>Free Version</strong></p>
+        <p><a href="https://chat.whatsapp.com/CVNEaIuky8D5X2qP6KGyEl" target="_blank">Upgrade to Premium</a></p>
         <input type="text" id="username" placeholder="Username" required><br>
         <input type="password" id="password" placeholder="Password" required><br>
         <button onclick="login()">Login</button>
@@ -299,6 +304,13 @@
         <label for="aimlock">Enable Aimlock:</label>
         <label class="switch">
             <input type="checkbox" id="aimlock">
+            <span class="slider"></span>
+        </label><br>
+
+        <!-- Aim Assist Toggle -->
+        <label for="aimassist">Enable Aim Assist:</label>
+        <label class="switch">
+            <input type="checkbox" id="aimassist">
             <span class="slider"></span>
         </label><br>
 
